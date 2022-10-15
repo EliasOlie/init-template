@@ -20,48 +20,52 @@ TEMPLATE_HELP_MESSAGE = """
 
 @click.group()
 def cli():
-  pass
+    pass
 
-@cli.command()# ✔
+
+@cli.command()  # ✔
 @click.option("--path", "-p", default=EXEC_PATH, help=PATH_HELP_MESSAGE)
 @click.option("--template", "-t", default=TEMPLATE_REPO, help=TEMPLATE_HELP_MESSAGE)
 def setup_no_git(path, template):
-  click.echo(click.style("Inicializando...", fg="blue"))
-  
-  os.system(f"git clone {template} {path}")
-   
-  os.system("rm -rf ./.git")
-  click.echo(click.style("Feito", fg="green"))
+    click.echo(click.style("Inicializando...", fg="blue"))
 
-@cli.command()# ✔
+    os.system(f"git clone {template} {path}")
+
+    os.system("rm -rf ./.git")
+    click.echo(click.style("Feito", fg="green"))
+
+
+@cli.command()  # ✔
 @click.option("--path", "-p", default=EXEC_PATH, help=PATH_HELP_MESSAGE)
 @click.option("--template", "-t", default=TEMPLATE_REPO, help=TEMPLATE_HELP_MESSAGE)
 def setup_git(path, template):
-  click.echo(click.style("Inicializando...", fg="blue"))
-  
-  os.system(f"git clone {template} {path}")
-  
-  click.echo(click.style("Preparando repositório", fg="yellow"))
-  os.system("rm -rf ./.git")
-  os.system("git init")
-    
-  click.echo(click.style("Feito", fg="green"))
+    click.echo(click.style("Inicializando...", fg="blue"))
+
+    os.system(f"git clone {template} {path}")
+
+    click.echo(click.style("Preparando repositório", fg="yellow"))
+    os.system("rm -rf ./.git")
+    os.system("git init")
+
+    click.echo(click.style("Feito", fg="green"))
+
 
 @cli.command()
 @click.option("--path", "-p", default=EXEC_PATH, help=PATH_HELP_MESSAGE)
 @click.option("--template", "-t", default=TEMPLATE_REPO, help=TEMPLATE_HELP_MESSAGE)
 @click.option("--remote-origin", "--origin", prompt=True)
 def setup_git_origin(path, template, remote_origin):
-  click.echo(click.style("Inicializando...", fg="blue"))
-  
-  os.system(f"git clone {template} {path}")
-  
-  click.echo(click.style("Preparando repositório", fg="yellow"))
-  os.system("rm -rf ./.git")
-  os.system("git init")
-  click.echo(click.style("Adicionando origem remota", fg="yellow"))
-  os.system(f"git remote add origin {remote_origin}")  
-  click.echo(click.style("Feito", fg="green"))
+    click.echo(click.style("Inicializando...", fg="blue"))
+
+    os.system(f"git clone {template} {path}")
+
+    click.echo(click.style("Preparando repositório", fg="yellow"))
+    os.system("rm -rf ./.git")
+    os.system("git init")
+    click.echo(click.style("Adicionando origem remota", fg="yellow"))
+    os.system(f"git remote add origin {remote_origin}")
+    click.echo(click.style("Feito", fg="green"))
+
 
 if __name__ == '__main__':
-  cli()
+    cli()
