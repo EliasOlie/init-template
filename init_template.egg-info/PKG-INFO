@@ -1,0 +1,17 @@
+Metadata-Version: 2.1
+Name: init-template
+Version: 0.0.1
+Summary: Exemplo de pacote PyPI
+Home-page: https://github.com/EliasOlie/init-template
+Author: Elias Olie
+Author-email: contato.eliasolie@gmail.com
+License: MIT License
+Keywords: Pacote
+Platform: UNKNOWN
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# init-template
+
+To run this project you need click
+
