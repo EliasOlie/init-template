@@ -14,10 +14,11 @@ try:
     DEFAULT_USER_TEMPLATE = jf["default_template"]
     DEFAULT_LANGUAGE = jf["default_language"]
 except:
-    click.echo(click.style("Parece que você ainda não configurou suas predefinições padrão, usaremos as nossas ;)", fg="yellow"))
+    click.echo(click.style(
+        "Parece que você ainda não configurou suas predefinições padrão, usaremos as nossas ;)", fg="yellow"))
 
 TEMPLATES = [
-    
+
     {"@EliasOlie/typescript": "https://github.com/EliasOlie/ts-setup.git"},
 ]
 
@@ -71,17 +72,18 @@ def config(language, default_template):
         click.echo(click.style(
             "Você ainda não configurou suas opções padrões, use \"setup\" para configurar", fg="red"))
 
+
 @cli.command()
 @click.option("--path", "-p", default=EXEC_PATH, help=PATH_HELP_MESSAGE)
 @click.option("--template", "-t", help=TEMPLATE_HELP_MESSAGE)
 def setup_no_git(path, template):
     if template is None:
-        selected_template = map(lambda x: x.get(DEFAULT_USER_TEMPLATE), TEMPLATES)
+        selected_template = map(lambda x: x.get(
+            DEFAULT_USER_TEMPLATE), TEMPLATES)
         template = [i for i in list(selected_template) if i is not None][0]
     else:
         selected_template = map(lambda x: x.get(template), TEMPLATES)
         template = [i for i in list(selected_template) if i is not None][0]
-
 
     click.echo(click.style("Inicializando...", fg="blue"))
 
@@ -96,12 +98,13 @@ def setup_no_git(path, template):
 @click.option("--template", "-t", help=TEMPLATE_HELP_MESSAGE)
 def setup_git(path, template):
     if template is None:
-        selected_template = map(lambda x: x.get(DEFAULT_USER_TEMPLATE), TEMPLATES)
+        selected_template = map(lambda x: x.get(
+            DEFAULT_USER_TEMPLATE), TEMPLATES)
         template = [i for i in list(selected_template) if i is not None][0]
     else:
         selected_template = map(lambda x: x.get(template), TEMPLATES)
         template = [i for i in list(selected_template) if i is not None][0]
-    
+
     click.echo(click.style("Inicializando...", fg="blue"))
 
     os.system(f"git clone {template} {path}")
@@ -119,7 +122,8 @@ def setup_git(path, template):
 @click.option("--remote-origin", "--origin", prompt=True)
 def setup_git_origin(path, template, remote_origin):
     if template is None:
-        selected_template = map(lambda x: x.get(DEFAULT_USER_TEMPLATE), TEMPLATES)
+        selected_template = map(lambda x: x.get(
+            DEFAULT_USER_TEMPLATE), TEMPLATES)
         template = [i for i in list(selected_template) if i is not None][0]
     else:
         selected_template = map(lambda x: x.get(template), TEMPLATES)
@@ -135,50 +139,6 @@ def setup_git_origin(path, template, remote_origin):
     click.echo(click.style("Adicionando origem remota", fg="yellow"))
     os.system(f"git remote add origin {remote_origin}")
     click.echo(click.style("Feito", fg="green"))
-
-
-# @cli.command()
-# @click.option("--path", "-p", default=EXEC_PATH, help=PATH_HELP_MESSAGE)
-# @click.option("--template", "-t", default=TEMPLATE_REPO, help=TEMPLATE_HELP_MESSAGE)
-# def setup_no_git(path, template):
-#     click.echo(click.style("Inicializando...", fg="blue"))
-
-#     os.system(f"git clone {template} {path}")
-
-#     os.system("rm -rf ./.git")
-#     click.echo(click.style("Feito", fg="green"))
-
-
-# @cli.command()
-# @click.option("--path", "-p", default=EXEC_PATH, help=PATH_HELP_MESSAGE)
-# @click.option("--template", "-t", default=TEMPLATE_REPO, help=TEMPLATE_HELP_MESSAGE)
-# def setup_git(path, template):
-#     click.echo(click.style("Inicializando...", fg="blue"))
-
-#     os.system(f"git clone {template} {path}")
-
-#     click.echo(click.style("Preparando repositório", fg="yellow"))
-#     os.system("rm -rf ./.git")
-#     os.system("git init")
-
-#     click.echo(click.style("Feito", fg="green"))
-
-
-# @cli.command()
-# @click.option("--path", "-p", default=EXEC_PATH, help=PATH_HELP_MESSAGE)
-# @click.option("--template", "-t", default=TEMPLATE_REPO, help=TEMPLATE_HELP_MESSAGE)
-# @click.option("--remote-origin", "--origin", prompt=True)
-# def setup_git_origin(path, template, remote_origin):
-#     click.echo(click.style("Inicializando...", fg="blue"))
-
-#     os.system(f"git clone {template} {path}")
-
-#     click.echo(click.style("Preparando repositório", fg="yellow"))
-#     os.system("rm -rf ./.git")
-#     os.system("git init")
-#     click.echo(click.style("Adicionando origem remota", fg="yellow"))
-#     os.system(f"git remote add origin {remote_origin}")
-#     click.echo(click.style("Feito", fg="green"))
 
 
 if __name__ == '__main__':

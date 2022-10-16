@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     readme = fh.read()
 
 setup(name='init_template',
-    version='0.0.1',
+    version='0.0.2',
     url='https://github.com/EliasOlie/init-template',
     license='MIT License',
     author='Elias Olie',
@@ -12,6 +12,6 @@ setup(name='init_template',
     long_description_content_type="text/markdown",
     author_email='contato.eliasolie@gmail.com',
     keywords='Pacote',
-    description=u'Exemplo de pacote PyPI',
+    description=u'Criador de templates para novos projetos',
     packages=['init_template'],
     install_requires=['click'],)
