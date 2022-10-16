@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 import os
 import click
+import json
+
+ROOT = os.path.dirname(__file__)
 
 EXEC_PATH = os.getcwd()
 TEMPLATE_REPO = "https://github.com/EliasOlie/ts-setup.git"
@@ -15,15 +18,44 @@ EX ".", "./repo"
 TEMPLATE_HELP_MESSAGE = """
 (pt-BR) Qual template você deseja, o valor padrão é um projeto minimalista de TS
 """
-# @click.option("--initialize-git", "--git", default=False, prompt=True)
 
 
 @click.group()
 def cli():
     pass
 
+@cli.command()
+@click.option("--language", "-l", prompt=True)
+@click.option("--default-template", "-dt", prompt=True)
+def setup(language, default_template):
+    if os.path.exists(f"{ROOT}/user_settings.json"):
+        with open(f"{ROOT}/user_settings.json", "rb") as json_file:
+            jf = json.load(json_file)
+            user_defalt_language = jf["default_language"]
+            user_default_template = jf["default_template"]
+            click.echo(click.style(
+                f"Você já configurou as opções da seguinte maneira:\nIdioma padrão: {user_defalt_language}\nTemplate padrão: {user_default_template}\n\nPara alterar use a opção \"config\"", fg="yellow"))
+    else:
+        with open(f"{ROOT}/user_settings.json", "w+") as json_file:
+            json.dump({"default_template": default_template,
+                      "default_language": language}, json_file)
+        
+        click.echo(click.style("Configurações salvas!", fg="green"))
 
-@cli.command()  # ✔
+@cli.command()
+@click.option("--language", "-l", prompt=True)
+@click.option("--default-template", "-dt", prompt=True)
+def config(language, default_template):
+    if os.path.exists(f"{ROOT}/user_settings.json"):
+        with open(f"{ROOT}/user_settings.json", "w+") as json_file:
+            json.dump({"default_template": default_template,
+                      "default_language": language}, json_file)
+        
+        click.echo(click.style("Configurações salvas!", fg="green"))
+    else:
+        click.echo(click.style("Você ainda não configurou suas opções padrões, use \"setup\" para configurar", fg="red"))
+
+@cli.command()
 @click.option("--path", "-p", default=EXEC_PATH, help=PATH_HELP_MESSAGE)
 @click.option("--template", "-t", default=TEMPLATE_REPO, help=TEMPLATE_HELP_MESSAGE)
 def setup_no_git(path, template):
@@ -35,7 +67,7 @@ def setup_no_git(path, template):
     click.echo(click.style("Feito", fg="green"))
 
 
-@cli.command()  # ✔
+@cli.command()
 @click.option("--path", "-p", default=EXEC_PATH, help=PATH_HELP_MESSAGE)
 @click.option("--template", "-t", default=TEMPLATE_REPO, help=TEMPLATE_HELP_MESSAGE)
 def setup_git(path, template):

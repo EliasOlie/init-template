@@ -1,3 +1,4 @@
 venv
 dist
 init_template.egg-info
+user_settings.json
