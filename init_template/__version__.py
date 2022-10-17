@@ -1,0 +1,8 @@
+__title__ = "Init-template"
+__description__ = "Criador de templates para novos projetos"
+__version__ = "0.0.2"
+__url__ = "https://github.com/EliasOlie/init-template"
+__author__  = "EliasOlie"
+__author_email__  = "contato.eliasolie@gmail.com"
+__license__ = "MIT"
+__copyright__ = "Copyright 2022 Elias Oliveira"
