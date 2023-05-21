@@ -3,3 +3,5 @@ dist
 init_template.egg-info
 user_settings.json
 __pycache__
+.vscode/
+user_templates.json
